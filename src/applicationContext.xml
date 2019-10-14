@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	                       http://www.springframework.org/schema/context
+	                       http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+
+	<bean id="userDao" class="spring.UserDaoImpl"></bean>
+	<bean id="userDao2" class="spring.UserDaoImpl_2"></bean>
+	
+	<bean id="username" class="java.lang.String">
+		<constructor-arg value="张三"></constructor-arg>
+	</bean>
+	
+	<!-- ====================手动装配    【非注解】 方式注入（构造函数注入 & 属性注入）======================================== -->
+	 <!-- 
+	 	【手动装配-非注解】：1. 构造函数注入：<constructor-arg>
+	  -->
+	<!-- 
+		<bean id="userService" class="spring.UserService">
+			<constructor-arg name="userDao" ref="userDao"></constructor-arg>
+			<constructor-arg name="username" value="张三"></constructor-arg>
+		</bean>
+	-->
+	
+	<!-- 
+		【手动装配-非注解】：2. 属性注入（setter注入）:<property>
+	-->
+	<!-- 
+		<bean id="userService3" class="spring.UserService">
+			<property name="userDao" ref="userDao"></property>相当于userService3.setUserDao(userDao);
+			<property name="username" value="张三"></property> 相当于userService3.setUsername("张三");
+		</bean> 
+	-->
+	
+	<!-- ====================手动装配    【注解】 方式注入（@Autowired 或  @Resource）======================================== -->
+	<!-- 
+		【手动装配-注解】：3. @Autowired 或  @Resource
+	-->
+	<bean id="userService" class="spring.UserService"></bean>
+	
+	<!-- 1. 开启手动装配的注解功能 -->
+	<context:annotation-config/>
+	
+</beans>

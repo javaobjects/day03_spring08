@@ -1,0 +1,39 @@
+1. 导入核心jar包
+	spring-aop.jar
+	
+2.在src的applicationContext.xml中修改声明头配置信息，同时开启注解配置功能
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	                       http://www.springframework.org/schema/context
+	                       http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<bean id="userDao" class="spring.UserDaoImpl"></bean>
+	<bean id="userDao2" class="spring.UserDaoImpl_2"></bean>
+	
+	<bean id="username" class="java.lang.String">
+		<constructor-arg value="张三"></constructor-arg>
+	</bean>
+	
+	<!-- ====================手动装配    【注解】 方式注入（@Autowired 或  @Resource）   start======================================== -->
+	<bean id="userService" class="spring.UserService"></bean>
+	
+	<!-- 开启手动装配的注解功能 -->
+	<context:annotation-config/>             
+	<!-- ====================手动装配    【注解】 方式注入（@Autowired 或  @Resource）    end======================================== -->
+	                       
+</beans>
+
+3.在UserService.java中使用注解进行装配
+	public class UserService {
+
+		//@Autowired @Qualifier("userDao2")  //1. 默认根据属性的类型进行匹配,如果对应的类型出现多个子类，再根据属性的名称进行匹配
+		
+		@Resource(name="userDao") //2. 默认根据名称进行匹配
+		private IUserDao userDao;
+		
+		@Autowired  //默认根据属性的类型进行匹配
+		private String username;
+		
+	}
