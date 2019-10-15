@@ -4,8 +4,17 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 /**
- * 构造函数注入
+ * 
+* <p>Title: UserService</p>  
+* <p>
+*	Description: 
+* 	构造函数注入
+*   
+* </p> 
+* @author xianxian 
+* @date 2019年10月14日
  */
 public class UserService {
 
